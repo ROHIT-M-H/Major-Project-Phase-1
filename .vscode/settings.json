@@ -1,0 +1,11 @@
+{
+    "python.defaultInterpreterPath": "C:\\Users\\sumpr\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python.pythonPath": "C:\\Users\\sumpr\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python.linting.enabled": false,
+    "python.linting.pylintEnabled": false,
+    "pylance.executeInTerminal": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnSave": false
+    }
+}
