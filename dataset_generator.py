@@ -1,7 +1,7 @@
 # dataset_generator_streamlit_fixed.py
 """
 Streamlit Synthetic EEG Dataset Generator 
- - top-1 candidate in report (instead of top-3)
+ - top-1 candidate in report (mental-state only)
  - conservative post-generation band scaling to better match metadata multipliers
  - inline multiplier editor (edit/save multipliers to multipliers_custom.json)
  - heuristic interpretation uses processed RMS data
@@ -360,7 +360,7 @@ def infer_combinations_for_vector_top1(rms_vec, restrict_to_selected=None):
                 if score > best_score:
                     best_score = score
                     best_trip = (m, l, s)
-    # format output
+    # format output as full combo string (older callers may expect this)
     m,l,s = best_trip
     combo = []
     if m: combo.append(m)
@@ -550,7 +550,24 @@ def generate_docx_report(df, metadata, output_path):
     for ch in CHANNEL_NAMES:
         vec = [rms_map[ch][b] for b in BAND_ORDER]
         best = infer_combinations_for_vector_top1(vec, restrict_to_selected=restrict)
-        combos_per_channel[ch] = best
+        # --- NEW: extract only mental state and score from the returned combo string ---
+        # 'best' looks like: "depressed, chronic_kidney_disease, sleep_deprivation (1.016)"
+        # or "none (0.123)". We want to keep only the mental-state (first token) and the score.
+        try:
+            if "(" in best and best.strip().endswith(")"):
+                score = best[best.rfind("("):].strip()
+                label_part = best[:best.rfind("(")].strip()
+            else:
+                score = ""
+                label_part = best
+            # mental is first item before comma (if present)
+            mental_only = label_part.split(",")[0].strip()
+            if mental_only == "":
+                mental_only = "none"
+            combos_per_channel[ch] = f"{mental_only} {score}".strip()
+        except Exception:
+            # fallback: keep full string if parsing fails
+            combos_per_channel[ch] = best
 
     # correlation heatmap
     corr = rms_df.fillna(0).T.corr()
@@ -597,14 +614,14 @@ def generate_docx_report(df, metadata, output_path):
     add_row("Music duration (s)", str(metadata.get("music_duration","")))
 
     doc.add_page_break()
-    doc.add_heading("Band RMS (per channel) + Best candidate", level=2)
+    doc.add_heading("Band RMS (per channel) + Best candidate (mental only)", level=2)
     cols_count = 1 + len(BAND_ORDER) + 1
     table = doc.add_table(rows=1, cols=cols_count, style='Light Grid Accent 1')
     hdr = table.rows[0].cells
     hdr[0].text = "Channel"
     for i,b in enumerate(BAND_ORDER):
         hdr[i+1].text = b.upper()
-    hdr[len(BAND_ORDER)+1].text = "BEST_CANDIDATE"
+    hdr[len(BAND_ORDER)+1].text = "BEST_MENTAL_CANDIDATE"
 
     for ch in CHANNEL_NAMES:
         cells = table.add_row().cells
@@ -941,4 +958,4 @@ with col2:
         st.info("No dataset generated. Click 'Generate single dataset'.")
 
 st.markdown("---")
-# st.markdown("Notes: The generator uses literature-informed multipliers (music -> alpha/theta for relaxing music, anxiety -> beta, depression -> increased theta/reduced alpha, age -> alpha decline). The report now includes a single best candidate per channel (best match to RMS shape). The generator performs a conservative post-synthesis band scaling to nudge generated RMS towards metadata-implied multipliers. This is heuristic/exploratory; consult domain experts for clinical use.")
+# st.markdown("Notes: The generator uses literature-informed multipliers (music -> alpha/theta for relaxing music, anxiety -> beta, depression -> increased theta/reduced alpha, age -> alpha decline). The report now includes a single best mental-state candidate per channel (best match to RMS shape). The generator performs a conservative post-synthesis band scaling to nudge generated RMS towards metadata-implied multipliers. This is heuristic/exploratory; consult domain experts for clinical use.")

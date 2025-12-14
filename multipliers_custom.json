@@ -29,6 +29,13 @@
       "alpha": 1.0,
       "beta": 1.0,
       "gamma": 1.0
+    },
+    "migrane": {
+      "delta": 1.9,
+      "theta": 1.7,
+      "alpha": 1.0,
+      "beta": 1.0,
+      "gamma": 1.0
     }
   }
 }
