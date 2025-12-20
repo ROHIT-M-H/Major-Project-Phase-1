@@ -50,3 +50,15 @@ DEFAULT_LONG_ISSUE_EMOTION = {
     "chronic_pain": {"valence": -0.30, "arousal": 0.25},
     "insomnia": {"valence": -0.20, "arousal": 0.20}
 }
+DEFAULT_SHORT_ISSUE_EMOTION = {
+    "fatigue": {"valence": -0.20, "arousal": -0.35},
+    "sleep_deprivation": {"valence": -0.25, "arousal": -0.40},
+    "acute_stress": {"valence": -0.10, "arousal": 0.45},
+    "mental_overload": {"valence": -0.15, "arousal": 0.40},
+    "headache": {"valence": -0.20, "arousal": -0.10},
+    "migraine": {"valence": -0.30, "arousal": -0.15},
+    "fever": {"valence": -0.25, "arousal": -0.20},
+    "dehydration": {"valence": -0.15, "arousal": -0.15},
+    "post_exercise": {"valence": 0.20, "arousal": 0.30},
+    "drowsiness": {"valence": -0.20, "arousal": -0.45}
+}
