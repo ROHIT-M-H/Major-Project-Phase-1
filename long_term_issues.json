@@ -1,0 +1,43 @@
+{
+    "depression": {
+        "bands": {
+            "theta": 1.3,
+            "alpha": 0.8
+        },
+        "emotion": {
+            "valence": -0.35,
+            "arousal": -0.15
+        }
+    },
+    "anxiety": {
+        "bands": {
+            "beta": 1.35,
+            "gamma": 1.2
+        },
+        "emotion": {
+            "valence": -0.15,
+            "arousal": 0.35
+        }
+    },
+    "alzheimers": {
+        "bands": {
+            "delta": 1.5,
+            "theta": 1.45,
+            "alpha": 0.7
+        },
+        "emotion": {
+            "valence": -0.3,
+            "arousal": -0.25
+        }
+    },
+    "epilepsy": {
+        "bands": {
+            "delta": 1.6,
+            "theta": 1.4
+        },
+        "emotion": {
+            "valence": -0.1,
+            "arousal": 0.1
+        }
+    }
+}

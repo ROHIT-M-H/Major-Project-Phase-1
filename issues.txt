@@ -1,0 +1,52 @@
+DEFAULT_LONG_ISSUE_MAP = {
+    # Mood & psychiatric
+    "depression": {"theta": 1.30, "alpha": 0.80},
+    "anxiety": {"beta": 1.35, "gamma": 1.20},
+    "bipolar_disorder": {"beta": 1.25, "gamma": 1.15},
+    "schizophrenia": {"delta": 1.40, "theta": 1.35, "alpha": 0.75},
+
+    # Neurological
+    "epilepsy": {"delta": 1.60, "theta": 1.40},
+    "parkinsons": {"theta": 1.30, "beta": 0.85},
+    "alzheimers": {"delta": 1.50, "theta": 1.45, "alpha": 0.70},
+    "adhd": {"theta": 1.35, "beta": 0.80},
+
+    # Systemic / chronic illness
+    "chronic_pain": {"beta": 1.30, "gamma": 1.20},
+    "hypertension": {"beta": 1.25},
+    "diabetes": {"theta": 1.20, "alpha": 0.90},
+    "asthma": {"theta": 1.15},
+
+    # Sleep-related
+    "insomnia": {"beta": 1.30, "gamma": 1.20}
+}
+
+
+
+DEFAULT_SHORT_ISSUE_MAP = {
+    "fatigue": {"theta": 1.35, "alpha": 1.10},
+    "sleep_deprivation": {"delta": 1.40, "theta": 1.45},
+    "acute_stress": {"beta": 1.45, "gamma": 1.30},
+    "mental_overload": {"beta": 1.40},
+    "headache": {"theta": 1.25},
+    "migraine": {"theta": 1.30, "alpha": 0.85},
+    "fever": {"delta": 1.25},
+    "dehydration": {"theta": 1.20},
+    "post_exercise": {"beta": 1.25},
+    "drowsiness": {"delta": 1.35, "theta": 1.40}
+}
+
+
+
+
+DEFAULT_LONG_ISSUE_EMOTION = {
+    "depression": {"valence": -0.35, "arousal": -0.15},
+    "anxiety": {"valence": -0.15, "arousal": 0.35},
+    "bipolar_disorder": {"valence": 0.20, "arousal": 0.40},
+    "schizophrenia": {"valence": -0.25, "arousal": -0.10},
+    "epilepsy": {"valence": -0.10, "arousal": 0.10},
+    "alzheimers": {"valence": -0.30, "arousal": -0.25},
+    "adhd": {"valence": 0.05, "arousal": 0.30},
+    "chronic_pain": {"valence": -0.30, "arousal": 0.25},
+    "insomnia": {"valence": -0.20, "arousal": 0.20}
+}

@@ -1,0 +1,22 @@
+{
+    "fatigue": {
+        "bands": {
+            "theta": 1.35,
+            "alpha": 1.1
+        },
+        "emotion": {
+            "valence": -0.2,
+            "arousal": -0.35
+        }
+    },
+    "sleep_deprivation": {
+        "bands": {
+            "delta": 1.4,
+            "theta": 1.45
+        },
+        "emotion": {
+            "valence": -0.25,
+            "arousal": -0.4
+        }
+    }
+}
