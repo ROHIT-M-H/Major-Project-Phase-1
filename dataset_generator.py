@@ -1,13 +1,3 @@
-"""
-Synthetic EEG Dataset Generator – ADVANCED FINAL VERSION
-
-✔ Original participant metadata logic preserved
-✔ Original music stimulus logic preserved
-✔ Research-grounded stochastic ranges applied correctly
-✔ TypeError FIXED (tuple × tuple issue)
-✔ Viva-safe, reproducible, auditable
-"""
-
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -414,12 +404,12 @@ def compute_emotion(meta):
         a += scale * sample_range(td["arousal"])
 
     for i in meta["long"]:
-        v += LONG_DATA[i]["emotion"]["valence"]
-        a += LONG_DATA[i]["emotion"]["arousal"]
+        v += sample_range(LONG_DATA[i]["emotion"]["valence"])
+        a += sample_range(LONG_DATA[i]["emotion"]["arousal"])
 
     for i in meta["short"]:
-        v += SHORT_DATA[i]["emotion"]["valence"]
-        a += SHORT_DATA[i]["emotion"]["arousal"]
+        v += sample_range(SHORT_DATA[i]["emotion"]["valence"])
+        a += sample_range(SHORT_DATA[i]["emotion"]["arousal"])
 
     return infer_emotion(v, a), np.clip(v, -1, 1), np.clip(a, -1, 1)
 
@@ -443,12 +433,12 @@ def generate_dataset(meta, duration, fs):
         band_mult[k] *= sample_range(vv)
 
     for i in meta["long"]:
-        for b, m in LONG_DATA[i]["bands"].items():
-            band_mult[b] *= m
+            for b, m in LONG_DATA[i]["bands"].items():
+                band_mult[b] *= sample_range(m)
 
     for i in meta["short"]:
         for b, m in SHORT_DATA[i]["bands"].items():
-            band_mult[b] *= m
+            band_mult[b] *= sample_range(m)
 
     if meta["music"]:
         for b, m in MUSIC_MAP[meta["genre"]].items():
